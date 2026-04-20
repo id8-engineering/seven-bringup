@@ -70,11 +70,19 @@ west update
 Build application:
 
 ```bash
-west build -p always -b nrf9151dk/nrf9151 app
+west build -p always -b seven/nrf9151 app
 ```
 
 Flash firmware:
 
 ```bash
 west flash
+```
+
+### Console
+
+Use west rtt
+
+```bash
+west rtt
 ```
