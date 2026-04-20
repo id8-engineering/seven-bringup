@@ -1,0 +1,123 @@
+/*
+ * Copyright (c) 2026 ID8 Engineering AB
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+#include <zephyr/dt-bindings/gpio/gpio.h>
+#include <zephyr/dt-bindings/led/led.h>
+#include <zephyr/dt-bindings/pwm/pwm.h>
+#include <nordic/nrf91xx_partition.dtsi>
+
+/ {
+	chosen {
+		zephyr,console = &uart0;
+		zephyr,led-strip = &system_led;
+		zephyr,shell-uart = &uart0;
+		zephyr,uart-mcumgr = &uart0;
+	};
+
+	/*
+	 * Seven does not assign fixed UART/I2C/SPI roles to the mikroBUS sockets.
+	 * Application overlays must select which serial peripheral instances are
+	 * used.
+	 *
+	 * On nRF9151, the serial blocks are multiplexed:
+	 *   - uart1 / i2c1 / spi1 share one hardware block
+	 *   - uart2 / i2c2 / spi2 share one hardware block
+	 *   - uart3 / i2c3 / spi3 share one hardware block
+	 *
+	 * Only one function from each group can be enabled at a time.
+	 *
+	 * For the non-secure target, uart1 is disabled by default to match the
+	 * upstream nrf9151dk behavior where TF-M uses it by default.
+	 */
+
+	system_led: led_strip {
+		compatible = "worldsemi,ws2812-gpio";
+		chain-length = <1>;
+		color-mapping = <LED_COLOR_ID_GREEN
+				 LED_COLOR_ID_RED
+				 LED_COLOR_ID_BLUE>;
+		gpios = <&gpio0 18 GPIO_ACTIVE_HIGH>;
+		reset-delay = <50>;
+	};
+
+	buzzer: buzzer {
+		pwms = <&pwm1 0 PWM_MSEC(20) PWM_POLARITY_NORMAL>;
+		status = "okay";
+	};
+
+	mikrobus_1_header: mikrobus-connector-1 {
+		compatible = "mikro-bus";
+		#gpio-cells = <2>;
+		gpio-map-mask = <0xffffffff 0xffffffc0>;
+		gpio-map-pass-thru = <0 0x3f>;
+		gpio-map = <0 0 &gpio0 14 0>,  /* AN */
+			   <1 0 &gpio0 2 0>,   /* RST */
+			   <2 0 &gpio0 0 0>,   /* CS */
+			   <3 0 &gpio0 6 0>,   /* SCK */
+			   <4 0 &gpio0 5 0>,   /* MISO */
+			   <5 0 &gpio0 4 0>,   /* MOSI */
+			   <6 0 &gpio0 3 0>,   /* PWM */
+			   <7 0 &gpio0 1 0>,   /* INT */
+			   <8 0 &gpio0 11 0>,  /* RX */
+			   <9 0 &gpio0 10 0>,  /* TX */
+			   <10 0 &gpio0 8 0>,  /* SCL */
+			   <11 0 &gpio0 9 0>;  /* SDA */
+	};
+
+	mikrobus_2_header: mikrobus-connector-2 {
+		compatible = "mikro-bus";
+		#gpio-cells = <2>;
+		gpio-map-mask = <0xffffffff 0xffffffc0>;
+		gpio-map-pass-thru = <0 0x3f>;
+		gpio-map = <0 0 &gpio0 20 0>,  /* AN */
+			   <1 0 &gpio0 16 0>,  /* RST */
+			   <2 0 &gpio0 7 0>,   /* CS */
+			   <3 0 &gpio0 29 0>,  /* SCK */
+			   <4 0 &gpio0 28 0>,  /* MISO */
+			   <5 0 &gpio0 21 0>,  /* MOSI */
+			   <6 0 &gpio0 17 0>,  /* PWM */
+			   <7 0 &gpio0 15 0>,  /* INT */
+			   <8 0 &gpio0 13 0>,  /* RX */
+			   <9 0 &gpio0 12 0>,  /* TX */
+			   <10 0 &gpio0 31 0>, /* SCL */
+			   <11 0 &gpio0 30 0>; /* SDA */
+	};
+
+	aliases {
+		led-strip = &system_led;
+		watchdog0 = &wdt0;
+		mikrobus-header-1 = &mikrobus_1_header;
+		mikrobus-header-2 = &mikrobus_2_header;
+		mikrobus-header = &mikrobus_1_header;
+	};
+};
+
+&adc {
+	status = "okay";
+};
+
+&gpiote {
+	status = "okay";
+};
+
+&gpio0 {
+	status = "okay";
+};
+
+&pwm1 {
+	status = "okay";
+	pinctrl-0 = <&pwm1_default>;
+	pinctrl-1 = <&pwm1_sleep>;
+	pinctrl-names = "default", "sleep";
+};
+
+&uart0 {
+	status = "okay";
+	current-speed = <115200>;
+	pinctrl-0 = <&uart0_default>;
+	pinctrl-1 = <&uart0_sleep>;
+	pinctrl-names = "default", "sleep";
+};

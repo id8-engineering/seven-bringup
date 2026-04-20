@@ -1,0 +1,23 @@
+/*
+ * Copyright (c) 2023 Nordic Semiconductor ASA
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/dts-v1/;
+#include <nordic/nrf9151_laca.dtsi>
+#include "seven_nrf9151_common-pinctrl.dtsi"
+#include "seven_nrf9151_common.dtsi"
+
+/ {
+	model = "Seven nRF9151";
+	compatible = "id8,seven-nrf9151";
+
+	chosen {
+		zephyr,sram = &sram0_s;
+		zephyr,flash = &flash0;
+		zephyr,code-partition = &slot0_partition;
+		zephyr,sram-secure-partition = &sram0_s;
+		zephyr,sram-non-secure-partition = &sram0_ns;
+	};
+};
