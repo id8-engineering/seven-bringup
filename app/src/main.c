@@ -4,7 +4,7 @@
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
 #include "led_rbg.h"
-#include "zephyr/sys/clock.h"
+#include "buzzer.h"
 
 LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
 
@@ -14,7 +14,12 @@ int main(void)
 
 	LOG_INF("Starting RGB LED test");
 	k_sleep(K_SECONDS(3));
-	led_test();
-	LOG_INF("RGB LED test is done");
+	test_led();
+	LOG_INF("RGB LED test passed");
+
+	LOG_INF("Starting Buzzer test");
+	k_sleep(K_SECONDS(3));
+	test_buzzer();
+	LOG_INF("Buzzer test passed");
 	return 0;
 }

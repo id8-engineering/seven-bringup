@@ -1,9 +1,9 @@
 // Copyright (c) 2026 ID8 Engineering AB
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef LED_RBG_H_
-#define LED_RBG_H_
+#ifndef BUZZER_H_
+#define BUZZER_H_
 
-void test_led(void);
+void test_buzzer(void);
 
-#endif /* LED_RBG_H_ */
+#endif /* BUZZER_H_ */
