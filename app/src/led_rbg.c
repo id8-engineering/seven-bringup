@@ -12,7 +12,7 @@ LOG_MODULE_REGISTER(led_rbg, LOG_LEVEL_INF);
 
 static const struct device *led_strip = DEVICE_DT_GET(DT_CHOSEN(zephyr_led_strip));
 
-void led_test(void)
+void test_led(void)
 {
 	struct led_rgb pixel = {
 		.r = 0x00,
