@@ -44,6 +44,10 @@ On nRF9151, the serial blocks are multiplexed:
 
 Only one function from each group can be enabled at a time.
 
+The on-board RGB LED uses ``spi1`` with MOSI on ``P0.18`` by default, so
+serial block 1 is not available for mikroBUS™ overlays unless that LED route
+is overridden.
+
 For ``seven/nrf9151/ns``, ``uart1`` is disabled by default to match the
 upstream ``nrf9151dk`` non-secure board behavior where TF-M uses it by
 default.
@@ -54,7 +58,7 @@ Connections and IOs
 On-board peripherals
 --------------------
 
-* System LED data = ``P0.18``
+* System LED data = ``P0.18`` via ``spi1`` MOSI
 * Buzzer PWM = ``P0.19``
 * Debug UART TX = ``P0.27``
 * Debug UART RX = ``P0.26``
