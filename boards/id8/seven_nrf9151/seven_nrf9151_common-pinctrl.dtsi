@@ -7,12 +7,12 @@
 #include <zephyr/dt-bindings/pinctrl/nrf-pinctrl.h>
 
 /*
- * Candidate pinctrl routes for mikroBUS serial functions.
+ * Pinctrl routes for the default mikroBUS serial mappings.
  *
- * The base board does not enable these routes by default. Application
- * overlays should select the UART/I2C/SPI instances they need, while
- * respecting the nRF9151 mux rule that uartX/i2cX/spiX share the same
- * hardware block for each X.
+ * mikroBUS 1 uses serial block 2 (uart2 / i2c2 / spi2) and mikroBUS 2 uses
+ * serial block 3 (uart3 / i2c3 / spi3). Application overlays should enable
+ * the needed function while respecting the nRF9151 mux rule that uartX/i2cX/
+ * spiX share the same hardware block for each X.
  */
 
 &pinctrl {
@@ -108,15 +108,15 @@
 
 	mikrobus_2_i2c_default: mikrobus_2_i2c_default {
 		group1 {
-			psels = <NRF_PSEL(TWIM_SDA, 0, 30)>,
-				<NRF_PSEL(TWIM_SCL, 0, 31)>;
+			psels = <NRF_PSEL(TWIM_SDA, 0, 22)>,
+				<NRF_PSEL(TWIM_SCL, 0, 23)>;
 		};
 	};
 
 	mikrobus_2_i2c_sleep: mikrobus_2_i2c_sleep {
 		group1 {
-			psels = <NRF_PSEL(TWIM_SDA, 0, 30)>,
-				<NRF_PSEL(TWIM_SCL, 0, 31)>;
+			psels = <NRF_PSEL(TWIM_SDA, 0, 22)>,
+				<NRF_PSEL(TWIM_SCL, 0, 23)>;
 			low-power-enable;
 		};
 	};
