@@ -30,11 +30,13 @@ Supported Features
 mikroBUS Notes
 ==============
 
-Seven does not assign fixed UART, I2C, or SPI roles to the mikroBUS sockets in
-the base board definition.
+Seven provides default serial routing for the mikroBUS sockets:
 
-Application overlays are expected to select the serial peripheral instances
-they need.
+* mikroBUS 1 uses ``uart2`` / ``i2c2`` / ``spi2``
+* mikroBUS 2 uses ``uart3`` / ``i2c3`` / ``spi3``
+
+Application overlays are expected to enable the function they need on the
+target socket.
 
 On nRF9151, the serial blocks are multiplexed:
 
@@ -42,7 +44,9 @@ On nRF9151, the serial blocks are multiplexed:
 * ``uart2`` / ``i2c2`` / ``spi2``
 * ``uart3`` / ``i2c3`` / ``spi3``
 
-Only one function from each group can be enabled at a time.
+Only one function from each group can be enabled at a time, so each mikroBUS
+socket may use UART or I2C or SPI, but not multiple of those functions
+simultaneously.
 
 The on-board RGB LED uses ``spi1`` with MOSI on ``P0.18`` by default, so
 serial block 1 is not available for mikroBUS™ overlays unless that LED route
@@ -51,6 +55,13 @@ is overridden.
 For ``seven/nrf9151/ns``, ``uart1`` is disabled by default to match the
 upstream ``nrf9151dk`` non-secure board behavior where TF-M uses it by
 default.
+
+Examples:
+
+* To place an I2C Click board on mikroBUS 1, enable ``&i2c2`` and add the
+  device below it in an app overlay.
+* To place an SPI Click board on mikroBUS 2, enable ``&spi3`` and add the
+  device below it in an app overlay.
 
 Connections and IOs
 ===================
@@ -92,8 +103,8 @@ mikroBUS 2
 * INT = ``P0.15``
 * RX = ``P0.13``
 * TX = ``P0.12``
-* SCL = ``P0.31``
-* SDA = ``P0.30``
+* SCL = ``P0.23``
+* SDA = ``P0.22``
 
 Programming and Debugging
 *************************

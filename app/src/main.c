@@ -3,6 +3,7 @@
 
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
+#include "mikroBUS_sensor.h"
 #include "led_rbg.h"
 #include "buzzer.h"
 
@@ -13,13 +14,18 @@ int main(void)
 	LOG_INF("Hello world, starting functional tests on Seven!");
 
 	LOG_INF("Starting RGB LED test");
-	k_sleep(K_SECONDS(3));
+	k_sleep(K_SECONDS(1));
 	test_led();
-	LOG_INF("RGB LED test passed");
+	LOG_INF("RGB LED test done");
 
 	LOG_INF("Starting Buzzer test");
-	k_sleep(K_SECONDS(3));
+	k_sleep(K_SECONDS(1));
 	test_buzzer();
-	LOG_INF("Buzzer test passed");
+	LOG_INF("Buzzer test done");
+
+	LOG_INF("Starting mikroBUS sensor test");
+	test_mikroBUS_sensor();
+	LOG_INF("mikroBUS sensor test done");
+
 	return 0;
 }

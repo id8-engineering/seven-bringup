@@ -12,4 +12,5 @@ target_sources(app PRIVATE
   src/main.c
   src/led_rbg.c
   src/buzzer.c
+  src/mikroBUS_sensor.c
 )

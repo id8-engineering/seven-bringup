@@ -18,16 +18,20 @@
 	};
 
 	/*
-	 * Seven does not assign fixed UART/I2C/SPI roles to the mikroBUS™ sockets.
-	 * Application overlays must select which serial peripheral instances are
-	 * used.
+	 * Seven provides default serial routing for the mikroBUS™ sockets:
+	 *   - mikroBUS 1 uses uart2 / i2c2 / spi2
+	 *   - mikroBUS 2 uses uart3 / i2c3 / spi3
+	 *
+	 * Application overlays enable the function they need on the target socket.
 	 *
 	 * On nRF9151, the serial blocks are multiplexed:
 	 *   - uart1 / i2c1 / spi1 share one hardware block
 	 *   - uart2 / i2c2 / spi2 share one hardware block
 	 *   - uart3 / i2c3 / spi3 share one hardware block
 	 *
-	 * Only one function from each group can be enabled at a time.
+	 * Only one function from each group can be enabled at a time, so each
+	 * mikroBUS socket may use UART or I2C or SPI, but not multiple of those
+	 * functions simultaneously.
 	 *
 	 * For the non-secure target, uart1 is disabled by default to match the
 	 * upstream nrf9151dk behavior where TF-M uses it by default.
@@ -77,8 +81,8 @@
 			   <7 0 &gpio0 15 0>,  /* INT */
 			   <8 0 &gpio0 13 0>,  /* RX */
 			   <9 0 &gpio0 12 0>,  /* TX */
-			   <10 0 &gpio0 31 0>, /* SCL */
-			   <11 0 &gpio0 30 0>; /* SDA */
+			   <10 0 &gpio0 23 0>, /* SCL */
+			   <11 0 &gpio0 22 0>; /* SDA */
 	};
 
 	aliases {
@@ -87,6 +91,12 @@
 		mikrobus-header-1 = &mikrobus_1_header;
 		mikrobus-header-2 = &mikrobus_2_header;
 		mikrobus-header = &mikrobus_1_header;
+		mikrobus-1-uart = &uart2;
+		mikrobus-1-i2c = &i2c2;
+		mikrobus-1-spi = &spi2;
+		mikrobus-2-uart = &uart3;
+		mikrobus-2-i2c = &i2c3;
+		mikrobus-2-spi = &spi3;
 	};
 };
 
@@ -135,5 +145,49 @@
 	current-speed = <115200>;
 	pinctrl-0 = <&uart0_default>;
 	pinctrl-1 = <&uart0_sleep>;
+	pinctrl-names = "default", "sleep";
+};
+
+&uart2 {
+	status = "disabled";
+	pinctrl-0 = <&mikrobus_1_uart_default>;
+	pinctrl-1 = <&mikrobus_1_uart_sleep>;
+	pinctrl-names = "default", "sleep";
+};
+
+&uart3 {
+	status = "disabled";
+	pinctrl-0 = <&mikrobus_2_uart_default>;
+	pinctrl-1 = <&mikrobus_2_uart_sleep>;
+	pinctrl-names = "default", "sleep";
+};
+
+&i2c2 {
+	status = "disabled";
+	pinctrl-0 = <&mikrobus_1_i2c_default>;
+	pinctrl-1 = <&mikrobus_1_i2c_sleep>;
+	pinctrl-names = "default", "sleep";
+};
+
+&i2c3 {
+	status = "disabled";
+	pinctrl-0 = <&mikrobus_2_i2c_default>;
+	pinctrl-1 = <&mikrobus_2_i2c_sleep>;
+	pinctrl-names = "default", "sleep";
+};
+
+&spi2 {
+	compatible = "nordic,nrf-spim";
+	status = "disabled";
+	pinctrl-0 = <&mikrobus_1_spi_default>;
+	pinctrl-1 = <&mikrobus_1_spi_sleep>;
+	pinctrl-names = "default", "sleep";
+};
+
+&spi3 {
+	compatible = "nordic,nrf-spim";
+	status = "disabled";
+	pinctrl-0 = <&mikrobus_2_spi_default>;
+	pinctrl-1 = <&mikrobus_2_spi_sleep>;
 	pinctrl-names = "default", "sleep";
 };
