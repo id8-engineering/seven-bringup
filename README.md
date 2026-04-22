@@ -1,6 +1,9 @@
 # seven-bringup
 
 This is a bringup test application for [Seven](https://github.com/id8-engineering/seven-hardware/)
+<p align="center">
+  <img src="assets/seven_nrf9151.jpg" alt="Seven nRF9151" width="50%" />
+</p>
 
 ## Prerequisites
 
