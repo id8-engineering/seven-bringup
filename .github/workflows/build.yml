@@ -36,4 +36,6 @@ jobs:
         working-directory: seven-bringup
         shell: bash
         run: |
-          west build --no-sysbuild -p always -b seven/nrf9151 app
+          west build --sysbuild -p always -b seven/nrf9151/ns app/ -- \
+          -DBOARD_ROOT=$PWD \
+          -DDTS_ROOT=$PWD
