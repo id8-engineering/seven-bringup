@@ -3,9 +3,11 @@
 
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
-#include "mikroBUS_sensor.h"
-#include "led_rbg.h"
+
 #include "buzzer.h"
+#include "gnss.h"
+#include "led_rbg.h"
+#include "mikroBUS_sensor.h"
 
 LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
 
@@ -27,5 +29,8 @@ int main(void)
 	test_mikroBUS_sensor();
 	LOG_INF("mikroBUS sensor test done");
 
+	LOG_INF("Starting GNSS test");
+	test_gnss();
+	LOG_INF("GNSS test done");
 	return 0;
 }
