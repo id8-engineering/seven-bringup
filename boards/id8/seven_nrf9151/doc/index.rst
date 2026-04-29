@@ -20,23 +20,25 @@ Seven is based on the Nordic nRF9151 and provides:
 * One WS2812-compatible system LED on ``P0.18``
 * One passive buzzer on ``P0.19``
 * One debug UART on ``P0.27`` (TX) and ``P0.26`` (RX)
-* Two mikroBUS headers
+* Two mikroBUS™ headers
 
 Supported Features
 ==================
 
 .. zephyr:board-supported-hw::
 
-mikroBUS Notes
+mikroBUS™ Notes
 ==============
 
-Seven provides default serial routing for the mikroBUS sockets:
+Seven provides default interface routing for the mikroBUS™ sockets:
 
-* mikroBUS 1 uses ``uart2`` / ``i2c2`` / ``spi2``
-* mikroBUS 2 uses ``uart3`` / ``i2c3`` / ``spi3``
+* mikroBUS™ 1 uses ``uart2`` / ``i2c2`` / ``spi2``
+* mikroBUS™ 2 uses ``uart3`` / ``i2c3`` / ``spi3``
 
 Application overlays are expected to enable the function they need on the
-target socket.
+target socket. The generic ``&mikrobus_*`` labels target mikroBUS™ 1 by
+default, while the explicit ``&mikrobus_1_*`` and ``&mikrobus_2_*`` labels
+target a specific socket.
 
 On nRF9151, the serial blocks are multiplexed:
 
@@ -44,7 +46,7 @@ On nRF9151, the serial blocks are multiplexed:
 * ``uart2`` / ``i2c2`` / ``spi2``
 * ``uart3`` / ``i2c3`` / ``spi3``
 
-Only one function from each group can be enabled at a time, so each mikroBUS
+Only one function from each group can be enabled at a time, so each mikroBUS™
 socket may use UART or I2C or SPI, but not multiple of those functions
 simultaneously.
 
@@ -58,10 +60,15 @@ default.
 
 Examples:
 
-* To place an I2C Click board on mikroBUS 1, enable ``&i2c2`` and add the
-  device below it in an app overlay.
-* To place an SPI Click board on mikroBUS 2, enable ``&spi3`` and add the
-  device below it in an app overlay.
+* To place an I2C Click board on mikroBUS™ 1, enable ``&mikrobus_1_i2c`` and
+  add the device below it in an app overlay.
+* To place an SPI Click board on mikroBUS™ 2, enable ``&mikrobus_2_spi`` and
+  add the device below it in an app overlay.
+* To place a UART Click board on mikroBUS™ 1, enable ``&mikrobus_1_serial`` in
+  an app overlay.
+* Upstream shields target mikroBUS™ 1 by default through
+  ``&mikrobus_spi``, ``&mikrobus_i2c``, ``&mikrobus_serial``, and
+  ``&mikrobus_header``.
 
 Connections and IOs
 ===================
@@ -74,7 +81,7 @@ On-board peripherals
 * Debug UART TX = ``P0.27``
 * Debug UART RX = ``P0.26``
 
-mikroBUS 1
+mikroBUS™ 1
 ----------
 
 * AN = ``P0.14``
@@ -90,7 +97,7 @@ mikroBUS 1
 * SCL = ``P0.08``
 * SDA = ``P0.09``
 
-mikroBUS 2
+mikroBUS™ 2
 ----------
 
 * AN = ``P0.20``
@@ -113,21 +120,6 @@ Seven provides a TC2030 SWD/JTAG connector for programming and a UART VCOM
 interface for debug output.
 
 .. zephyr:board-supported-runners::
-
-Building
-********
-
-Build a secure application with:
-
-.. code-block:: console
-
-   west build -b seven/nrf9151 app
-
-Build a non-secure application with:
-
-.. code-block:: console
-
-   west build -b seven/nrf9151/ns app
 
 References
 **********

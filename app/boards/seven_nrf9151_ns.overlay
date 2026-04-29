@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-&i2c3 {
+&mikrobus_1_i2c {
 	status = "okay";
 
 	hts221@5f {
