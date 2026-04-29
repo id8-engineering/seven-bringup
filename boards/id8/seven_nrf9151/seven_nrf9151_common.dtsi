@@ -19,8 +19,8 @@
 
 	/*
 	 * Seven provides default serial routing for the mikroBUS™ sockets:
-	 *   - mikroBUS 1 uses uart2 / i2c2 / spi2
-	 *   - mikroBUS 2 uses uart3 / i2c3 / spi3
+	 *   - mikroBUS™ 1 uses uart2 / i2c2 / spi2
+	 *   - mikroBUS™ 2 uses uart3 / i2c3 / spi3
 	 *
 	 * Application overlays enable the function they need on the target socket.
 	 *
@@ -30,7 +30,7 @@
 	 *   - uart3 / i2c3 / spi3 share one hardware block
 	 *
 	 * Only one function from each group can be enabled at a time, so each
-	 * mikroBUS socket may use UART or I2C or SPI, but not multiple of those
+	 * mikroBUS™ socket may use UART or I2C or SPI, but not multiple of those
 	 * functions simultaneously.
 	 *
 	 * For the non-secure target, uart1 is disabled by default to match the
@@ -91,14 +91,37 @@
 		mikrobus-header-1 = &mikrobus_1_header;
 		mikrobus-header-2 = &mikrobus_2_header;
 		mikrobus-header = &mikrobus_1_header;
+		mikrobus-1-serial = &uart2;
 		mikrobus-1-uart = &uart2;
 		mikrobus-1-i2c = &i2c2;
 		mikrobus-1-spi = &spi2;
+		mikrobus-2-serial = &uart3;
 		mikrobus-2-uart = &uart3;
 		mikrobus-2-i2c = &i2c3;
 		mikrobus-2-spi = &spi3;
 	};
 };
+
+/*
+ * Upstream Zephyr shields expect the default mikroBUS™ connector to expose
+ * these node labels directly. Socket 1 is the default connector on Seven.
+ */
+mikrobus_header: &mikrobus_1_header {};
+mikrobus_serial: &uart2 {};
+mikrobus_i2c: &i2c2 {};
+mikrobus_spi: &spi2 {};
+
+/*
+ * Also expose explicit labels for both sockets so applications or future
+ * shields can target either connector without depending on aliases.
+ */
+mikrobus_1_serial: &uart2 {};
+mikrobus_1_i2c: &i2c2 {};
+mikrobus_1_spi: &spi2 {};
+
+mikrobus_2_serial: &uart3 {};
+mikrobus_2_i2c: &i2c3 {};
+mikrobus_2_spi: &spi3 {};
 
 &adc {
 	status = "okay";

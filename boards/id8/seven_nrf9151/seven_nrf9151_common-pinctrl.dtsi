@@ -7,9 +7,9 @@
 #include <zephyr/dt-bindings/pinctrl/nrf-pinctrl.h>
 
 /*
- * Pinctrl routes for the default mikroBUS serial mappings.
+ * Pinctrl routes for the default mikroBUS™ serial mappings.
  *
- * mikroBUS 1 uses serial block 2 (uart2 / i2c2 / spi2) and mikroBUS 2 uses
+ * mikroBUS™ 1 uses serial block 2 (uart2 / i2c2 / spi2) and mikroBUS™ 2 uses
  * serial block 3 (uart3 / i2c3 / spi3). Application overlays should enable
  * the needed function while respecting the nRF9151 mux rule that uartX/i2cX/
  * spiX share the same hardware block for each X.

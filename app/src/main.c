@@ -7,6 +7,7 @@
 #include "buzzer.h"
 #include "gnss.h"
 #include "led_rbg.h"
+#include "lte.h"
 #include "mikroBUS_sensor.h"
 
 LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
@@ -32,5 +33,6 @@ int main(void)
 	LOG_INF("Starting GNSS test");
 	test_gnss();
 	LOG_INF("GNSS test done");
+	test_lte();
 	return 0;
 }
