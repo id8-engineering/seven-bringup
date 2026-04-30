@@ -17,6 +17,9 @@ static int read_sensor_parameters(const struct device *dev, struct sensor_value 
 
 void test_mikroBUS_sensor(void)
 {
+	LOG_INF("Starting MikroBUS I2C test");
+	LOG_INF("...");
+
 	struct sensor_value temp;
 	struct sensor_value hum;
 

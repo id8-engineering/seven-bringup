@@ -14,19 +14,21 @@ void test_lte()
 {
 	int err;
 
-	LOG_INF("Starting LTE");
+	LOG_INF("Running LTE test");
+	LOG_INF("...");
 
 	err = nrf_modem_lib_init();
 	if (err < 0) {
 		LOG_ERR("Modem init failed: %d", err);
-		return err;
+		return;
 	}
 
 	err = lte_lc_connect();
 	if (err < 0) {
 		LOG_ERR("LTE connect failed: %d", err);
-		return err;
+		return;
 	}
 
 	LOG_INF("LTE connected");
+	LOG_INF("LTE test done");
 }
