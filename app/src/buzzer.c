@@ -38,6 +38,8 @@ static int play_tone(uint32_t freq_hz, uint32_t duration_ms)
 
 void test_buzzer()
 {
+	LOG_INF("Running buzzer test");
+	LOG_INF("...");
 	play_tone(659, 125); /* E5 */
 	k_sleep(K_MSEC(125));
 	play_tone(659, 125); /* E5 */
@@ -88,4 +90,5 @@ void test_buzzer()
 	k_sleep(K_MSEC(125));
 	play_tone(494, 125); /* B4 */
 	k_sleep(K_MSEC(375));
+  LOG_INF("Buzzer test over");
 }

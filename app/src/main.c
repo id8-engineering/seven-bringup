@@ -14,25 +14,26 @@ LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
 
 int main(void)
 {
-	LOG_INF("Hello world, starting functional tests on Seven!");
 
-	LOG_INF("Starting RGB LED test");
-	k_sleep(K_SECONDS(1));
-	test_led();
-	LOG_INF("RGB LED test done");
+	if (IS_ENABLED(CONFIG_SEVEN_TEST_LED)) {
+		test_led();
+	}
 
-	LOG_INF("Starting Buzzer test");
-	k_sleep(K_SECONDS(1));
-	test_buzzer();
-	LOG_INF("Buzzer test done");
+	if (IS_ENABLED(CONFIG_SEVEN_TEST_BUZZER)) {
+		test_buzzer();
+	}
 
-	LOG_INF("Starting mikroBUS sensor test");
-	test_mikroBUS_sensor();
-	LOG_INF("mikroBUS sensor test done");
+	if (IS_ENABLED(CONFIG_SEVEN_TEST_I2C_MIKROBUS)) {
+		test_mikroBUS_sensor();
+	}
 
-	LOG_INF("Starting GNSS test");
-	test_gnss();
-	LOG_INF("GNSS test done");
-	test_lte();
+	if (IS_ENABLED(CONFIG_SEVEN_TEST_GNSS)) {
+		test_gnss();
+	}
+
+	if (IS_ENABLED(CONFIG_SEVEN_TEST_LTE)) {
+		test_lte();
+	}
+
 	return 0;
 }

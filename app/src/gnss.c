@@ -43,6 +43,7 @@ static void gnss_event_handler(int event)
 					last_pvt.latitude, last_pvt.longitude,
 					(double)last_pvt.accuracy);
 				k_sem_give(&fix_sem);
+				LOG_INF("GNSS Test done");
 			}
 		}
 		break;
@@ -63,7 +64,8 @@ void test_gnss(void)
 
 	k_sem_init(&fix_sem, 0, 1);
 
-	LOG_INF("Starting GNSS");
+	LOG_INF("Running GNSS test");
+	LOG_INF("...");
 
 	err = nrf_modem_lib_init();
 	if (err < 0) {

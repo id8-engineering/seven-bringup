@@ -1,0 +1,23 @@
+# Copyright (c) 2026 ID8 Engineering AB
+# SPDX-License-Identifier: Apache-2.0
+
+source "Kconfig.zephyr"
+
+menu "Seven bringup tests"
+
+config SEVEN_TEST_LED
+	bool "Test RGB LED"
+
+config SEVEN_TEST_BUZZER
+	bool "Test buzzer"
+
+config SEVEN_TEST_I2C_MIKROBUS
+	bool "Test mikroBUS I2C"
+
+config SEVEN_TEST_GNSS
+	bool "Test GNSS"
+
+config SEVEN_TEST_LTE
+	bool "Test LTE"
+
+endmenu

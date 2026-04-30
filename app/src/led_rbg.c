@@ -14,6 +14,9 @@ static const struct device *led_strip = DEVICE_DT_GET(DT_CHOSEN(zephyr_led_strip
 
 void test_led(void)
 {
+	LOG_INF("Running RGB LED test");
+	LOG_INF("...");
+
 	struct led_rgb pixel = {
 		.r = 0x00,
 		.g = 0x00,
