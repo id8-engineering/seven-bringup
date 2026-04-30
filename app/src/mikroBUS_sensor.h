@@ -4,6 +4,6 @@
 #ifndef MIKROBUS_SENSOR_H_
 #define MIKROBUS_SENSOR_H_
 
-void test_mikroBUS_sensor(void);
+void test_mikroBUS_I2C(void);
 
 #endif /* MIKROBUS_SENSOR_H_ */
