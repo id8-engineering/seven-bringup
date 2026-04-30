@@ -4,12 +4,32 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-&mikrobus_1_i2c {
-	status = "okay";
+/* &mikrobus_i2c { */
+/* 	status = "okay"; */
+/**/
+/* 	hts221@5f { */
+/* 		compatible = "st,hts221"; */
+/* 		reg = <0x5f>; */
+/* 		status = "okay"; */
+/* 	}; */
+/* }; */
 
-	hts221@5f {
-		compatible = "st,hts221";
-		reg = <0x5f>;
-		status = "okay";
-	};
-};
+/* &mikrobus_spi { */
+/* 	status = "okay"; */
+/* 	cs-gpios = <&mikrobus_header 2 GPIO_ACTIVE_LOW>; */
+/**/
+/* 	can0: can@0 { */
+/* 		compatible = "microchip,mcp2515"; */
+/* 		reg = <0>; */
+/* 		spi-max-frequency = <10000000>; */
+/* 		int-gpios = <&mikrobus_header 7 GPIO_ACTIVE_LOW>; */
+/* 		osc-freq = <10000000>; */
+/* 		status = "okay"; */
+/* 	}; */
+/* }; */
+/**/
+/* / { */
+/* 	chosen { */
+/* 		zephyr,canbus = &can0; */
+/* 	}; */
+/* }; */

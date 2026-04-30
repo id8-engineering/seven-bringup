@@ -14,6 +14,9 @@ config SEVEN_TEST_BUZZER
 config SEVEN_TEST_I2C_MIKROBUS
 	bool "Test mikroBUS I2C"
 
+config SEVEN_TEST_CAN_MIKROBUS
+	bool "Test mikroBUS CAN"
+
 config SEVEN_TEST_GNSS
 	bool "Test GNSS"
 

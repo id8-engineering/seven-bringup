@@ -10,12 +10,14 @@
 
 LOG_MODULE_REGISTER(mikroBUS_sensor, LOG_LEVEL_INF);
 
+#if defined(CONFIG_SEVEN_TEST_I2C_MIKROBUS)
+
 static const struct device *dev = DEVICE_DT_GET_ONE(st_hts221);
 
 static int read_sensor_parameters(const struct device *dev, struct sensor_value *temp,
 				  struct sensor_value *hum);
 
-void test_mikroBUS_sensor(void)
+void test_mikroBUS_I2C(void)
 {
 	LOG_INF("Starting MikroBUS I2C test");
 	LOG_INF("...");
@@ -81,3 +83,5 @@ static int read_sensor_parameters(const struct device *dev, struct sensor_value 
 
 	return 0;
 }
+
+#endif
