@@ -1,0 +1,15 @@
+mainmenu "nrfcredstore_app"
+
+source "Kconfig.zephyr"
+
+menu "nrfcredstore_app"
+
+config NRFCREDSTORE_APP_SEC_TAG
+	int "Security tag"
+	default 123
+	range 0 2147483647
+	help
+	  Security tag used when provisioning the root CA, client
+	  certificate, and private key into the modem credential store.
+
+endmenu
