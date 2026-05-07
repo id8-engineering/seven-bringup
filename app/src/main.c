@@ -8,6 +8,7 @@
 #include "gnss.h"
 #include "led_rbg.h"
 #include "lte.h"
+#include "gpio.h"
 #include "mikroBUS_CAN.h"
 #include "mikroBUS_sensor.h"
 
@@ -15,13 +16,15 @@ LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
 
 int main(void)
 {
-
 	if (IS_ENABLED(CONFIG_SEVEN_TEST_LED)) {
 		test_led();
 	}
 
 	if (IS_ENABLED(CONFIG_SEVEN_TEST_BUZZER)) {
 		test_buzzer();
+	}
+	if (IS_ENABLED(CONFIG_SEVEN_TEST_GPIO_MIKROBUS)) {
+		test_gpio();
 	}
 
 	if (IS_ENABLED(CONFIG_SEVEN_TEST_I2C_MIKROBUS)) {

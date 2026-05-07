@@ -13,6 +13,7 @@ target_sources(app PRIVATE
   src/led_rbg.c
   src/buzzer.c
   src/lte.c
+  src/gpio.c
   src/mikroBUS_sensor.c
   src/mikroBUS_CAN.c
 )
