@@ -11,6 +11,9 @@ config SEVEN_TEST_LED
 config SEVEN_TEST_BUZZER
 	bool "Test buzzer"
 
+config SEVEN_TEST_GPIO_MIKROBUS
+  bool "Test GPIOs mikroBUS"
+
 config SEVEN_TEST_I2C_MIKROBUS
 	bool "Test mikroBUS I2C"
 
