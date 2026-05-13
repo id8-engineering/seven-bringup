@@ -127,8 +127,6 @@ Build application:
 
 ```bash
 west build --sysbuild -p always -b seven/nrf9151/ns app/ -- \
--DBOARD_ROOT=$PWD \
--DDTS_ROOT=$PWD
 ```
 
 Flash firmware:
