@@ -16,4 +16,5 @@ target_sources(app PRIVATE
   src/gpio.c
   src/mikroBUS_sensor.c
   src/mikroBUS_CAN.c
+  src/mikroBUS_pwm.c
 )

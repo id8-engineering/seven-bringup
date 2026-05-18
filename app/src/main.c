@@ -10,6 +10,7 @@
 #include "lte.h"
 #include "gpio.h"
 #include "mikroBUS_CAN.h"
+#include "mikroBUS_pwm.h"
 #include "mikroBUS_sensor.h"
 
 LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
@@ -33,6 +34,10 @@ int main(void)
 
 	if (IS_ENABLED(CONFIG_SEVEN_TEST_CAN_MIKROBUS)) {
 		test_mikroBUS_CAN();
+	}
+
+	if (IS_ENABLED(CONFIG_SEVEN_TEST_PWM_MIKROBUS)) {
+		test_mikroBUS_pwm();
 	}
 
 	if (IS_ENABLED(CONFIG_SEVEN_TEST_GNSS)) {

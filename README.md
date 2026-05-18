@@ -126,7 +126,7 @@ west update
 Build application:
 
 ```bash
-west build --sysbuild -p always -b seven/nrf9151/ns app/ -- \
+west build --sysbuild -p always -b seven/nrf9151/ns app/
 ```
 
 Flash firmware:
