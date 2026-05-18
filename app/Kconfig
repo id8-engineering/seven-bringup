@@ -23,6 +23,9 @@ config SEVEN_TEST_CAN_MIKROBUS
 config SEVEN_TEST_PWM_MIKROBUS
 	bool "Test mikroBUS PWM"
 
+config SEVEN_TEST_AN_MIKROBUS
+	bool "Test mikroBUS AN"
+
 config SEVEN_TEST_GNSS
 	bool "Test GNSS"
 

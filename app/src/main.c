@@ -9,6 +9,7 @@
 #include "led_rbg.h"
 #include "lte.h"
 #include "gpio.h"
+#include "mikroBUS_adc.h"
 #include "mikroBUS_CAN.h"
 #include "mikroBUS_pwm.h"
 #include "mikroBUS_sensor.h"
@@ -38,6 +39,10 @@ int main(void)
 
 	if (IS_ENABLED(CONFIG_SEVEN_TEST_PWM_MIKROBUS)) {
 		test_mikroBUS_pwm();
+	}
+
+	if (IS_ENABLED(CONFIG_SEVEN_TEST_AN_MIKROBUS)) {
+		test_mikroBUS_adc();
 	}
 
 	if (IS_ENABLED(CONFIG_SEVEN_TEST_GNSS)) {
