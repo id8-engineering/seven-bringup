@@ -17,4 +17,5 @@ target_sources(app PRIVATE
   src/mikroBUS_sensor.c
   src/mikroBUS_CAN.c
   src/mikroBUS_pwm.c
+  src/mikroBUS_adc.c
 )
