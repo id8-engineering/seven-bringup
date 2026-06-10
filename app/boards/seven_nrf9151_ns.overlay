@@ -4,11 +4,22 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+/* / { */
+/* 	zephyr,user { */
+/* 		io-channels = <&adc 0>, <&adc 1>; */
+/* 		io-channel-names = "mikrobus_1_an", "mikrobus_2_an"; */
+/* 	}; */
+/* }; */
+
 / {
-	zephyr,user {
-		io-channels = <&adc 0>, <&adc 1>;
-		io-channel-names = "mikrobus_1_an", "mikrobus_2_an";
-	};
+  chosen {
+    ncs,at-host-uart = &uart3;
+  };
+};
+
+&uart3 {
+	status = "okay";
+	current-speed = <115200>;
 };
 
 /* #include <zephyr/dt-bindings/pwm/pwm.h> */

@@ -4,6 +4,8 @@
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
 
+#include <modem/nrf_modem_lib.h>
+
 #include "buzzer.h"
 #include "gnss.h"
 #include "led_rbg.h"
@@ -18,6 +20,16 @@ LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
 
 int main(void)
 {
+	int err;
+
+	if (IS_ENABLED(CONFIG_NRF_MODEM_LIB)) {
+		err = nrf_modem_lib_init();
+		if (err) {
+			LOG_ERR("Modem library initialization failed: %d", err);
+			return 0;
+		}
+	}
+
 	if (IS_ENABLED(CONFIG_SEVEN_TEST_LED)) {
 		test_led();
 	}
